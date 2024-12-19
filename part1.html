@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	
+<link rel="apple-touch-icon" sizes="180x180" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/apple-touch-icon.png">
+
+<link rel="icon" type="image/png" sizes="32x32" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon-32x32.png">
+
+<link rel="icon" type="image/png" sizes="16x16" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon-16x16.png">
+
+<link rel="manifest" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/site.webmanifest">
+
+<link rel="shortcut icon" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon.ico">
+
+<meta name="msapplication-TileColor" content="#da532c">
+
+<meta name="msapplication-config" content="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/browserconfig.xml">
+
+<meta name="theme-color" content="#ffffff">
+
+	<title>The Canvas API, Part 1 - The Background | David Matthew</title>
+<meta name='robots' content='max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	<link rel='dns-prefetch' href='//cdnjs.cloudflare.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='stylesheet' id='wp-block-library-css' href='https://davidmatthew.ie/wp-includes/css/dist/block-library/style.min.css' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='cookie-notice-front-css' href='https://davidmatthew.ie/wp-content/plugins/cookie-notice/css/front.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='google-fonts-css' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C400i%2C600%2C700%2C900&#038;display=swap' type='text/css' media='all' />
+<link rel='stylesheet' id='prism-css' href='https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/themes/prism-okaidia.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawesome-5-css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='tiny-slider-css' href='https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/tiny-slider.css' type='text/css' media='all' />
+<link rel='stylesheet' id='david-matthew-ie-css' href='https://davidmatthew.ie/wp-content/themes/david-matthew-theme/style.css' type='text/css' media='all' />
+<script type="text/javascript" id="cookie-notice-front-js-before">
+/* <![CDATA[ */
+var cnArgs = {"ajaxUrl":"https:\/\/davidmatthew.ie\/wp-admin\/admin-ajax.php","nonce":"37cab738a6","hideEffect":"fade","position":"bottom","onScroll":false,"onScrollOffset":100,"onClick":false,"cookieName":"cookie_notice_accepted","cookieTime":2592000,"cookieTimeRejected":2592000,"globalCookie":false,"redirection":false,"cache":true,"revokeCookies":false,"revokeCookiesOpt":"automatic"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://davidmatthew.ie/wp-content/plugins/cookie-notice/js/front.min.js" id="cookie-notice-front-js"></script>
+<link rel="https://api.w.org/" href="https://davidmatthew.ie/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://davidmatthew.ie/wp-json/wp/v2/posts/125" /><link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://davidmatthew.ie/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdavidmatthew.ie%2Fthe-canvas-api-part-1-the-background%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://davidmatthew.ie/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fdavidmatthew.ie%2Fthe-canvas-api-part-1-the-background%2F&#038;format=xml" />
+<link rel="canonical" href="https://davidmatthew.ie/the-canvas-api-part-1-the-background/">
+<meta name="description" content="In this post, we take a look at the history of the HTML5 Canvas API; why it was developed, what it is, and how it compares to other graphics formats like SVG.">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P6N6CQF');</script>
+<!-- End Google Tag Manager -->
+<meta property="og:title" content="The Canvas API, Part 1 - The Background | David Matthew">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://davidmatthew.ie/wp-content/uploads/Canvas-01.jpg">
+<meta property="og:image:width" content="768">
+<meta property="og:image:height" content="768">
+<meta property="og:image:alt" content="Canvas 01">
+<meta property="og:description" content="In this post, we take a look at the history of the HTML5 Canvas API; why it was developed, what it is, and how it compares to other graphics formats like SVG.">
+<meta property="og:url" content="https://davidmatthew.ie/the-canvas-api-part-1-the-background/">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="David Matthew">
+<meta property="article:published_time" content="2020-10-04T20:39:10+00:00">
+<meta property="article:modified_time" content="2021-01-27T18:00:47+00:00">
+<meta property="og:updated_time" content="2021-01-27T18:00:47+00:00">
+<meta property="article:section" content="Blog">
+<meta property="article:tag" content="Canvas">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://davidmatthew.ie/wp-content/uploads/Canvas-01.jpg">
+<meta name="author" content="davidmatthew">
+<meta name="date" content="2020-10-04T20:39:10+00:00">
+
+<!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
+
+<!-- END recaptcha -->
+<link rel="icon" href="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-180x180.png" />
+<meta name="msapplication-TileImage" content="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			html {
+  scroll-behavior: smooth;
+}
+
+#primary p, #primary li, #secondary p, #secondary li {
+  font-size: 1.1rem;
+  line-height: 1.8rem;
+}
+
+code {
+	font-family: monospace;
+	font-size: 1rem;
+	background-color: #dedee5;
+	padding: 2px 5px;
+	border-radius: 5px;
+}
+
+#menu-desktop li a {
+	height: 100%;
+	padding-top: 0;
+	display: flex;
+	flex-direction: row;
+  align-items: center;
+}
+
+pre[class*=language-]{
+	margin: 1em 0;
+}
+
+code[class*=language-]{
+	margin-left: -5px;
+}
+
+.wp-block-image img {
+	object-fit: contain;
+}
+
+#homepage-content #title img {
+	border: 1px solid #ddd;
+}
+
+
+
+		</style>
+		
+</head>
+
+<body class="post-template-default single single-post postid-125 single-format-standard cookies-not-set">
+
+
+<nav class="nav" role="navigation" aria-label="main navigation">
+
+	<div class="navbar container">
+
+		<a class="logo" href="https://davidmatthew.ie">
+
+			<img src="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/dm-logo-2019.svg" alt="Logo">
+
+		</a>
+
+		<div id="navbar-toggle">
+
+			<div></div>
+			<div></div>
+			<div></div>
+
+		</div>
+
+		<div id="menu-desktop">
+
+			<ul id="menu-menu-1" class="menu"><li id="menu-item-105" class="fas fa-bookmark menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-105"><a href="https://davidmatthew.ie/category/blog/">Blog</a></li>
+<li id="menu-item-36" class="fas fa-code menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-36"><a>Code</a>
+<ul class="sub-menu">
+	<li id="menu-item-37" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a target="_blank" href="https://profiles.wordpress.org/davidmatthew/#content-plugins">WordPress Plugins</a></li>
+	<li id="menu-item-99" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-99"><a target="_blank" href="https://github.com/davidmatthew-ie/david-matthew-theme">This Website</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a target="_blank" href="https://github.com/davidmatthew-ie?tab=repositories">All Repositories</a></li>
+</ul>
+</li>
+<li id="menu-item-497" class="fas fa-palette menu-item menu-item-type-custom menu-item-object-custom menu-item-497"><a target="_blank" href="https://www.instagram.com/davidmatthew_ie/">Art</a></li>
+<li id="menu-item-47" class="fas fa-music menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a target="_blank" href="https://open.spotify.com/artist/2CVCluSD7hTfhhJCkm0C3x">Music</a></li>
+<li id="menu-item-101" class="fas fa-envelope-open-text menu-item menu-item-type-custom menu-item-object-custom menu-item-101"><a target="_blank" href="/cdn-cgi/l/email-protection#771316011e131a1603031f1200591e1237101a161e1b5914181a">Contact Me</a></li>
+</ul>
+		</div>
+
+	</div>
+
+	<div id="menu-mobile">
+
+		<ul id="menu-menu-2" class="menu"><li class="fas fa-bookmark menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-105"><a href="https://davidmatthew.ie/category/blog/">Blog</a></li>
+<li class="fas fa-code menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-36"><a>Code</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-37"><a target="_blank" href="https://profiles.wordpress.org/davidmatthew/#content-plugins">WordPress Plugins</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-99"><a target="_blank" href="https://github.com/davidmatthew-ie/david-matthew-theme">This Website</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-38"><a target="_blank" href="https://github.com/davidmatthew-ie?tab=repositories">All Repositories</a></li>
+</ul>
+</li>
+<li class="fas fa-palette menu-item menu-item-type-custom menu-item-object-custom menu-item-497"><a target="_blank" href="https://www.instagram.com/davidmatthew_ie/">Art</a></li>
+<li class="fas fa-music menu-item menu-item-type-custom menu-item-object-custom menu-item-47"><a target="_blank" href="https://open.spotify.com/artist/2CVCluSD7hTfhhJCkm0C3x">Music</a></li>
+<li class="fas fa-envelope-open-text menu-item menu-item-type-custom menu-item-object-custom menu-item-101"><a target="_blank" href="/cdn-cgi/l/email-protection#6f0b0e19060b020e1b1b070a1841060a2f08020e0603410c0002">Contact Me</a></li>
+</ul>
+<div class="social-icons">
+
+	
+		<a class="animated fadeInUp" href="https://www.linkedin.com/in/david-matthew/" target="_blank">
+
+			<i class="fab fa-linkedin-in"></i>
+
+		</a>
+
+		
+		<a class="animated fadeInUp" href="https://profiles.wordpress.org/davidmatthew/#content-plugins" target="_blank">
+
+			<i class="fab fa-wordpress-simple"></i>
+
+		</a>
+
+		
+		<a class="animated fadeInUp" href="https://github.com/davidmatthew-ie" target="_blank">
+
+			<i class="fab fa-github"></i>
+
+		</a>
+
+		
+		<a class="animated fadeInUp" href="https://www.goodreads.com/user/show/66129526-david-matthew" target="_blank">
+
+			<i class="fab fa-goodreads-g"></i>
+
+		</a>
+
+		
+		<a class="animated fadeInUp" href="https://www.instagram.com/davidmatthew_ie/" target="_blank">
+
+			<i class="fab fa-instagram"></i>
+
+		</a>
+
+		
+		<a class="animated fadeInUp" href="https://open.spotify.com/artist/2CVCluSD7hTfhhJCkm0C3x" target="_blank">
+
+			<i class="fab fa-spotify"></i>
+
+		</a>
+
+		
+</div>
+
+	</div>
+
+</nav>
+
+<div class="container content-area flex-row">
+
+	<main id="primary">
+
+		
+<article id="post-125" class="post-125 post type-post status-publish format-standard has-post-thumbnail hentry category-blog category-tutorials tag-canvas tag-javascript">
+
+	
+<header class="entry-header">
+
+	<div class="header-content">
+
+		<h1 class="entry-title animated fadeInDown">The Canvas API, Part 1: The Background</h1>
+		<span class="animated fadeInLeft"><i class="fas fa-calendar-alt"></i>4 Oct 2020 (Updated 27 Jan 2021)</span>
+
+		<span class="animated fadeInLeft"><i class="fas fa-tags"></i>Tags: <a href="https://davidmatthew.ie/tag/canvas/" rel="tag">Canvas</a>, <a href="https://davidmatthew.ie/tag/javascript/" rel="tag">JavaScript</a></span>
+
+	</div>
+
+</header>
+
+	<div class="entry-content animated fadeInUp">
+
+		
+<h2 class="wp-block-heading">What is the Canvas API?</h2>
+
+
+
+<p>The Canvas API, or the ‘HTML5 Canvas’, allows for the creation of dynamic, interactive graphics for the web using JavaScript and the HTML <code>&lt;canvas&gt;</code> element. Just as a physical canvas captures paint, the <code>&lt;canvas&gt;</code> element captures pixels. These pixels are ‘painted’ with JavaScript (which we might think of as the brush) using the palette of functions provided by the Canvas API (or just Canvas, as I’ll henceforth call the API).</p>
+
+
+
+<p>This palette includes a full suite of shape-rendering and pixel-manipulation functions, and popular applications of it include games, animations, annoying advertisements and data visualisations. A lesser-known application, and one which I’ll be leaning towards throughout this series, is generative art (examples of which I include below).</p>
+
+
+
+<figure class="wp-block-gallery columns-2 is-cropped"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><a href="https://tylerxhobbs.com/#/linear-ii/" target="_blank" rel="noopener noreferrer"><img fetchpriority="high" decoding="async" width="800" height="800" src="https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1.jpg" alt="tyler-hobbs-linear-ii-detail-2 (1)" data-id="156" data-full-url="https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1.jpg" data-link="https://davidmatthew.ie/?attachment_id=156" class="wp-image-156" srcset="https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1.jpg 800w, https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1-300x300.jpg 300w, https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1-150x150.jpg 150w, https://davidmatthew.ie/wp-content/uploads/tyler-hobbs-linear-ii-detail-2-1-768x768.jpg 768w" sizes="(max-width: 800px) 100vw, 800px" /><figcaption class="blocks-gallery-item__caption">Linear II, by Tyler Hobbs</figcaption></figure></li><li class="blocks-gallery-item"></a><figure><a href="https://www.artnome.com/news/2018/8/8/generative-art-finds-its-prodigy" target="_blank" rel="noopener noreferrer"><img decoding="async" width="750" height="750" src="https://davidmatthew.ie/wp-content/uploads/cuda.jpg" alt="cuda" data-id="157" data-full-url="https://davidmatthew.ie/wp-content/uploads/cuda.jpg" data-link="https://davidmatthew.ie/?attachment_id=157" class="wp-image-157" srcset="https://davidmatthew.ie/wp-content/uploads/cuda.jpg 750w, https://davidmatthew.ie/wp-content/uploads/cuda-300x300.jpg 300w, https://davidmatthew.ie/wp-content/uploads/cuda-150x150.jpg 150w" sizes="(max-width: 750px) 100vw, 750px" /><figcaption class="blocks-gallery-item__caption">Cuda, by Manol Gamboa Naon</figcaption></a></figure></li></ul></figure>
+
+
+
+<p>Although technically capable of 3D graphics (via WebGL, which also renders to the canvas element), most discussions online of Canvas assume that we are referring to its 2D rendering capabilities, or its 2D ‘context’. I’ll explain more about this context later in this series, but for now, it’s generally safe to assume that Canvas is roughly synonymous with 2D web graphics.</p>
+
+
+
+<h2 class="wp-block-heading">Some More Context</h2>
+
+
+
+<p>The <code>&lt;canvas&gt;</code> element began its life in 2004 as an addition to Apple’s OS X WebKit component, the engine behind their Safari browser. Upon its release, this fledgling element was met with some backlash from the web development community, due in part to Apple’s apparent lack of concern for pursuing an open, consensus-driven approach to the evolution of the web. <a href="http://ln.hixie.ch/?start=1089635050&amp;count=1" target="_blank" rel="noreferrer noopener">As Ian Hickson put it at the time</a>:</p>
+
+
+
+<blockquote class="wp-block-quote is-layout-flow wp-block-quote-is-layout-flow"><p>Here is Apple introducing their own proprietary markup to the Web, without going through any sort of standardisation first.</p></blockquote>
+
+
+
+<p>Canvas was however soon adopted by other browsers, and what began as a proprietary extension eventually became open and standardized. <a href="https://www.w3.org/blog/news/archives/4167" target="_blank" rel="noreferrer noopener">In 2014</a> &#8211; ten years later &#8211; it was incorporated into the official W3C HTML5 specification.</p>
+
+
+
+<p>What made Canvas such an attractive addition to the web technology stack was its promise of performant, low-level procedural graphics, native to the web. Before this, if you wanted to develop games or other graphics-intensive applications online, Flash was your weapon of choice. And Flash, developed in-house at Adobe, required a plugin to work, was notoriously slow (particularly on mobile), and security-wise it was about as watertight as a spaghetti strainer.</p>
+
+
+
+<p>Canvas has suffered from none of these drawbacks, and has certainly helped dethrone Flash as the go-to choice for the development of online games, animations and other interactive media. It isn’t, however, the only game in town when it comes to 2D web graphics.</p>
+
+
+
+<h2 class="wp-block-heading">What&#8217;s Your Vector Victor?</h2>
+
+
+
+<p>SVG, which stands for Scalable Vector Graphics, was a specification released by the W3C all the way back in 2001, and it was, in some respects at least, arguably a more appropriate replacement for Flash than was Canvas. SVG, like Flash, is vector-based, and offers several possibilities with regards to animation. So why, you might ask, did we need Canvas at all?</p>
+
+
+
+<p>Well, it turns out that releasing a well-thought-out web specification doesn’t mean that browser vendors will automatically adopt it. Browsers have been a long time dragging their feet where SVG support is concerned, and it was only with the rise of high-resolution and high-density (a.k.a. ‘retina’) displays that SVG began to come into its own and get the adoption it deserved.</p>
+
+
+
+<p>This should give us a clue as to one of the main differentiators between SVG and Canvas; SVG, because it is vector-based, allows for resolution-independent rendering. Canvas, on the other hand, is bitmap-based, and thus resolution dependent. Zooming in on (i.e. scaling) a canvas element will result in pixelation, whereas SVG elements will remain crisp and clear no matter the scale factor.</p>
+
+
+
+<p>Before we rush to any judgement as to which one is ‘better’, we need to bear in mind that SVG and Canvas take very different approaches to how they handle graphics, and thus have their own strengths and weaknesses. I won&#8217;t go into a detailed comparison here (there&#8217;s a <a href="https://css-tricks.com/when-to-use-svg-vs-when-to-use-canvas/" target="_blank" rel="noreferrer noopener">nice and readable one over at CSS Tricks</a> if you fancy diving deeper); suffice to say, SVG is great for graphics that need to remain crisp at higher resolutions and don&#8217;t have a thousand moving parts. Canvas on the other hand is great at programming graphics of the latter variety (think particle systems or complex music visualisations), but wouldn&#8217;t be your go-to choice for a high-resolution logo.</p>
+
+
+
+<h2 class="wp-block-heading">What&#8217;s Next?</h2>
+
+
+
+<p>In <a href="https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/" data-type="post" data-id="205">the next part of the series</a>, we&#8217;ll get started using <code>&lt;canvas&gt;</code>, showing you how to declare and use its 2D context and create some basic shapes.</p>
+
+	</div><!-- .entry-content -->
+
+</article><!-- #post-125 -->
+
+<div id="comments" class="comments-area">
+
+			<h2 class="comments-title">
+			
+            2 thoughts on &ldquo;<span>The Canvas API, Part 1: The Background</span>&rdquo;		</h2><!-- .comments-title -->
+
+		
+		<ol class="comment-list">
+					<li id="comment-235" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-235" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='Michael Katz' src='https://secure.gravatar.com/avatar/560403b5eee12ac22a7a83c478ba0483?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/560403b5eee12ac22a7a83c478ba0483?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' decoding='async'/>						<b class="fn">Michael Katz</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://davidmatthew.ie/the-canvas-api-part-1-the-background/#comment-235"><time datetime="2022-02-21T13:16:49+01:00">February 21, 2022 at 13:16</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Saying that canvas=pixels and thus zooming in becomes pixelated isn&#8217;t always true, right? Because if you are using the shape drawing primitives to draw on canvas, and taking into account the user&#8217;s zoom level (within a game or other application), you can draw the (parts of) shapes with precision when zoomed. Right?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://davidmatthew.ie/the-canvas-api-part-1-the-background/?replytocom=235#respond" data-commentid="235" data-postid="125" data-belowelement="div-comment-235" data-respondelement="respond" data-replyto="Reply to Michael Katz" aria-label="Reply to Michael Katz">Reply</a></div>			</article><!-- .comment-body -->
+		<ol class="children">
+		<li id="comment-256" class="comment byuser comment-author-davidmatthew bypostauthor odd alt depth-2">
+			<article id="div-comment-256" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='davidmatthew' src='https://secure.gravatar.com/avatar/64a9a7c454931970667f97c9db07940f?s=32&#038;d=mm&#038;r=g' srcset='https://secure.gravatar.com/avatar/64a9a7c454931970667f97c9db07940f?s=64&#038;d=mm&#038;r=g 2x' class='avatar avatar-32 photo' height='32' width='32' loading='lazy' decoding='async'/>						<b class="fn"><a href="https://davidmatthew.ie" class="url" rel="ugc">davidmatthew</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="https://davidmatthew.ie/the-canvas-api-part-1-the-background/#comment-256"><time datetime="2022-03-25T18:09:26+01:00">March 25, 2022 at 18:09</time></a>					</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi Michael, that&#8217;s true &#8211; if you manually take account of the user&#8217;s zoom level. And in fact, <a href="https://davidmatthew.ie/the-canvas-api-part-3-a-retina-ready-responsive-canvas/">in a later article</a> I go into how you can ensure you keep your canvas as sharp as possible (e.g. vector-sharp), taking into account the user&#8217;s device pixel ratio &#8211; so using canvas doesn&#8217;t necessarily consign us to pixelated graphics. You&#8217;ve just got a bit of manual work to do, compared to something like SVG which handles this kind of rendering automatically.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply"><a rel="nofollow" class="comment-reply-link" href="https://davidmatthew.ie/the-canvas-api-part-1-the-background/?replytocom=256#respond" data-commentid="256" data-postid="125" data-belowelement="div-comment-256" data-respondelement="respond" data-replyto="Reply to davidmatthew" aria-label="Reply to davidmatthew">Reply</a></div>			</article><!-- .comment-body -->
+		</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		</ol><!-- .comment-list -->
+
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/the-canvas-api-part-1-the-background/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://davidmatthew.ie/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p><div  id="g-recaptcha-0" class="g-recaptcha" data-sitekey="6LeGrvIZAAAAADZNlONy1VYeBll--D6f35yax2aj" data-theme="light"></div><noscript>Please enable JavaScript to submit this form.<br></noscript></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" maxlength="200" autocomplete="url" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='125' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	
+</div><!-- #comments -->
+
+	</main>
+
+	
+<aside id="secondary" class="widget-area animated fadeInDown">
+
+	
+		<section id="recent-posts-2" class="widget widget_recent_entries">
+		<h2 class="widget-title">Recent Posts</h2>
+		<ul>
+											<li>
+					<a href="https://davidmatthew.ie/11twyg-eleventy-with-twig-and-yaml/">11twyg &#8211; Eleventy with Twig and YAML</a>
+									</li>
+											<li>
+					<a href="https://davidmatthew.ie/book-release-generative-art-with-javascript-and-svg/">Book Release: Generative Art with JavaScript and SVG</a>
+									</li>
+											<li>
+					<a href="https://davidmatthew.ie/how-to-launch-an-appimage-ubuntu/">How to Launch an AppImage from the Ubuntu Sidebar</a>
+									</li>
+											<li>
+					<a href="https://davidmatthew.ie/colour-perception-contrast-and-web-accessibility/">Colour Perception, Contrast and Web Accessibility</a>
+									</li>
+											<li>
+					<a href="https://davidmatthew.ie/chatgpt-the-content-creators-friend-or-foe/">ChatGPT: The content creator’s friend or foe?</a>
+									</li>
+					</ul>
+
+		</section><section id="weather-map-5" class="widget ventus weather-map-widget"><h2 class="widget-title">The Weather Where I Am</h2><iframe title="Ventus Weather Map Widget 52.515 -8.505" loading="lazy" style="box-sizing: border-box; width: 100%;  height: 350px;  border-radius: 3px" src="https://embed.windy.com/embed2.html?lat=52.515&lon=-8.505&zoom=7&overlay=wind&level=700h&marker=&pressure=&detailLat=52.515&detailLon=-8.505&metricWind=default&metricTemp=°C&detail=&calendar=now&product=ecmwf&menu=&message=true&type=map&location=coordinates&radarRange=-1" frameborder="0"></iframe></section><section id="categories-2" class="widget widget_categories"><h2 class="widget-title">Categories</h2>
+			<ul>
+					<li class="cat-item cat-item-12"><a href="https://davidmatthew.ie/category/blog/">Blog</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="https://davidmatthew.ie/category/news/">News</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="https://davidmatthew.ie/category/tutorials/">Tutorials</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://davidmatthew.ie/category/uncategorized/">Uncategorized</a>
+</li>
+			</ul>
+
+			</section><section id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://davidmatthew.ie/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></section>
+</aside>
+
+</div>
+
+
+<footer id="footer">
+
+	<p>&copy; David Matthew 2024</p>
+
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="application/ld+json" id="slim-seo-schema">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://davidmatthew.ie/#website","url":"https://davidmatthew.ie/","name":"David Matthew","potentialAction":{"@id":"https://davidmatthew.ie/#searchaction"},"publisher":{"@id":"https://davidmatthew.ie/#organization"}},{"@type":"SearchAction","@id":"https://davidmatthew.ie/#searchaction","target":"https://davidmatthew.ie/?s={search_term_string}","query-input":"required name=search_term_string"},{"@type":"BreadcrumbList","name":"Breadcrumbs","@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#breadcrumblist","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://davidmatthew.ie/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://davidmatthew.ie/category/blog/"}]},{"@type":"WebPage","@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#webpage","url":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/","inLanguage":"en_US","name":"The Canvas API, Part 1 - The Background | David Matthew","description":"In this post, we take a look at the history of the HTML5 Canvas API; why it was developed, what it is, and how it compares to other graphics formats like SVG.","datePublished":"2020-10-04T20:39:10+00:00","dateModified":"2021-01-27T18:00:47+00:00","isPartOf":{"@id":"https://davidmatthew.ie/#website"},"breadcrumb":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#breadcrumblist"},"primaryImageOfPage":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#thumbnail"},"image":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#thumbnail"}},{"@type":"Organization","@id":"https://davidmatthew.ie/#organization","url":"https://davidmatthew.ie/","name":"David Matthew"},{"@type":"ImageObject","@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#thumbnail","url":"https://davidmatthew.ie/wp-content/uploads/Canvas-01.jpg","width":768,"height":768},{"@type":"Article","@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#article","url":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/","headline":"The Canvas API, Part 1: The Background","datePublished":"2020-10-04T20:39:10+00:00","dateModified":"2021-01-27T18:00:47+00:00","commentCount":2,"wordCount":784,"keywords":["Canvas","JavaScript"],"articleSection":["Blog","Tutorials"],"isPartOf":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#webpage"},"mainEntityOfPage":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#webpage"},"image":{"@id":"https://davidmatthew.ie/the-canvas-api-part-1-the-background/#thumbnail"},"publisher":{"@id":"https://davidmatthew.ie/#organization"},"author":{"@id":"https://davidmatthew.ie/#/schema/person/2fe21967091bfe21ab79e576d039833c"}},{"@type":"Person","@id":"https://davidmatthew.ie/#/schema/person/2fe21967091bfe21ab79e576d039833c","url":"https://davidmatthew.ie","name":"davidmatthew","image":"https://secure.gravatar.com/avatar/64a9a7c454931970667f97c9db07940f?s=96&d=mm&r=g"}]}</script>
+<!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
+<script type="text/javascript">
+		var recaptcha_widgets={};
+		function wp_recaptchaLoadCallback(){
+			try {
+				grecaptcha;
+			} catch(err){
+				return;
+			}
+			var e = document.querySelectorAll ? document.querySelectorAll('.g-recaptcha:not(.wpcf7-form-control)') : document.getElementsByClassName('g-recaptcha'),
+				form_submits;
+
+			for (var i=0;i<e.length;i++) {
+				(function(el){
+					var wid;
+					// check if captcha element is unrendered
+					if ( ! el.childNodes.length) {
+						wid = grecaptcha.render(el,{
+							'sitekey':'6LeGrvIZAAAAADZNlONy1VYeBll--D6f35yax2aj',
+							'theme':el.getAttribute('data-theme') || 'light'
+						});
+						el.setAttribute('data-widget-id',wid);
+					} else {
+						wid = el.getAttribute('data-widget-id');
+						grecaptcha.reset(wid);
+					}
+				})(e[i]);
+			}
+		}
+
+		// if jquery present re-render jquery/ajax loaded captcha elements
+		if ( typeof jQuery !== 'undefined' )
+			jQuery(document).ajaxComplete( function(evt,xhr,set){
+				if( xhr.responseText && xhr.responseText.indexOf('6LeGrvIZAAAAADZNlONy1VYeBll--D6f35yax2aj') !== -1)
+					wp_recaptchaLoadCallback();
+			} );
+
+		</script><script src="https://www.google.com/recaptcha/api.js?onload=wp_recaptchaLoadCallback&#038;render=explicit" async defer></script>
+<!-- END recaptcha -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" id="prism-core-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/plugins/autoloader/prism-autoloader.min.js" id="prism-autoloader-js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js" id="tiny-slider-js"></script>
+<script type="text/javascript" src="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/js/main.js" id="main-js"></script>
+<script type="text/javascript" src="https://davidmatthew.ie/wp-includes/js/comment-reply.min.js" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
+
+		<!-- Cookie Notice plugin v2.5.4 by Hu-manity.co https://hu-manity.co/ -->
+		<div id="cookie-notice" role="dialog" class="cookie-notice-hidden cookie-revoke-hidden cn-position-bottom" aria-label="Cookie Notice" style="background-color: rgba(68,68,68,1);"><div class="cookie-notice-container" style="color: #fff"><span id="cn-notice-text" class="cn-text-container">I use cookies because, you know, you can't not these days. If you continue to use this site we'll assume you're ok with this! :)</span><span id="cn-notice-buttons" class="cn-buttons-container"><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button" aria-label="Yep" style="background-color: #00a99d">Yep</a><a href="https://davidmatthew.ie/privacy-policy/" target="_blank" id="cn-more-info" class="cn-more-info cn-button" aria-label="Privacy policy" style="background-color: #00a99d">Privacy policy</a></span><span id="cn-close-notice" data-cookie-set="accept" class="cn-close-icon" title="No"></span></div>
+			
+		</div>
+		<!-- / Cookie Notice plugin -->
+</body>
+</html>
+
+<!-- Cached by WP-Optimize (gzip) - https://getwpo.com - Last modified: December 19, 2024 17:19 (UTC:1) -->
