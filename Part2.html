@@ -1,32 +1,16 @@
-
-
 <!doctype html>
-
 <html lang="en-US">
-
 <head>
-
 	<meta charset="UTF-8" />
-
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	
 <link rel="apple-touch-icon" sizes="180x180" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/apple-touch-icon.png">
-
 <link rel="icon" type="image/png" sizes="32x32" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon-32x32.png">
-
 <link rel="icon" type="image/png" sizes="16x16" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon-16x16.png">
-
 <link rel="manifest" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/site.webmanifest">
-
 <link rel="shortcut icon" href="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/favicon.ico">
-
 <meta name="msapplication-TileColor" content="#da532c">
-
 <meta name="msapplication-config" content="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/favicons/browserconfig.xml">
-
 <meta name="theme-color" content="#ffffff">
-
 	<title>The Canvas API, Part 2: Basic Shapes and the 2D Context</title>
 <meta name='robots' content='max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
 	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
@@ -86,9 +70,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:image" content="https://davidmatthew.ie/wp-content/uploads/basic-shapes-v2.svg">
 <meta name="author" content="davidmatthew">
 <meta name="date" content="2021-01-21T21:35:23+00:00">
-
 <!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
-
 <!-- END recaptcha -->
 <link rel="icon" href="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-32x32.png" sizes="32x32" />
 <link rel="icon" href="https://davidmatthew.ie/wp-content/uploads/cropped-dm-logo-2019-favicon-512x512-1-192x192.png" sizes="192x192" />
@@ -98,12 +80,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 			html {
   scroll-behavior: smooth;
 }
-
 #primary p, #primary li, #secondary p, #secondary li {
   font-size: 1.1rem;
   line-height: 1.8rem;
 }
-
 code {
 	font-family: monospace;
 	font-size: 1rem;
@@ -111,7 +91,6 @@ code {
 	padding: 2px 5px;
 	border-radius: 5px;
 }
-
 #menu-desktop li a {
 	height: 100%;
 	padding-top: 0;
@@ -119,52 +98,33 @@ code {
 	flex-direction: row;
   align-items: center;
 }
-
 pre[class*=language-]{
 	margin: 1em 0;
 }
-
 code[class*=language-]{
 	margin-left: -5px;
 }
-
 .wp-block-image img {
 	object-fit: contain;
 }
-
 #homepage-content #title img {
 	border: 1px solid #ddd;
 }
-
-
-
 		</style>
 		
 </head>
-
 <body class="post-template-default single single-post postid-205 single-format-standard cookies-not-set">
-
-
 <nav class="nav" role="navigation" aria-label="main navigation">
-
 	<div class="navbar container">
-
 		<a class="logo" href="https://davidmatthew.ie">
-
 			<img src="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/img/dm-logo-2019.svg" alt="Logo">
-
 		</a>
-
 		<div id="navbar-toggle">
-
 			<div></div>
 			<div></div>
 			<div></div>
-
 		</div>
-
 		<div id="menu-desktop">
-
 			<ul id="menu-menu-1" class="menu"><li id="menu-item-105" class="fas fa-bookmark menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-105"><a href="https://davidmatthew.ie/category/blog/">Blog</a></li>
 <li id="menu-item-36" class="fas fa-code menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-36"><a>Code</a>
 <ul class="sub-menu">
@@ -178,11 +138,8 @@ code[class*=language-]{
 <li id="menu-item-101" class="fas fa-envelope-open-text menu-item menu-item-type-custom menu-item-object-custom menu-item-101"><a target="_blank" href="/cdn-cgi/l/email-protection#ff9b9e89969b929e8b8b979a88d1969abf98929e9693d19c9092">Contact Me</a></li>
 </ul>
 		</div>
-
 	</div>
-
 	<div id="menu-mobile">
-
 		<ul id="menu-menu-2" class="menu"><li class="fas fa-bookmark menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-105"><a href="https://davidmatthew.ie/category/blog/">Blog</a></li>
 <li class="fas fa-code menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-36"><a>Code</a>
 <ul class="sub-menu">
@@ -196,92 +153,41 @@ code[class*=language-]{
 <li class="fas fa-envelope-open-text menu-item menu-item-type-custom menu-item-object-custom menu-item-101"><a target="_blank" href="/cdn-cgi/l/email-protection#8aeeebfce3eee7ebfefee2effda4e3efcaede7ebe3e6a4e9e5e7">Contact Me</a></li>
 </ul>
 <div class="social-icons">
-
-	
 		<a class="animated fadeInUp" href="https://www.linkedin.com/in/david-matthew/" target="_blank">
-
 			<i class="fab fa-linkedin-in"></i>
-
 		</a>
-
-		
 		<a class="animated fadeInUp" href="https://profiles.wordpress.org/davidmatthew/#content-plugins" target="_blank">
-
 			<i class="fab fa-wordpress-simple"></i>
-
 		</a>
-
-		
 		<a class="animated fadeInUp" href="https://github.com/davidmatthew-ie" target="_blank">
-
 			<i class="fab fa-github"></i>
-
 		</a>
-
-		
 		<a class="animated fadeInUp" href="https://www.goodreads.com/user/show/66129526-david-matthew" target="_blank">
-
 			<i class="fab fa-goodreads-g"></i>
-
 		</a>
-
-		
 		<a class="animated fadeInUp" href="https://www.instagram.com/davidmatthew_ie/" target="_blank">
-
 			<i class="fab fa-instagram"></i>
-
 		</a>
-
-		
 		<a class="animated fadeInUp" href="https://open.spotify.com/artist/2CVCluSD7hTfhhJCkm0C3x" target="_blank">
-
 			<i class="fab fa-spotify"></i>
-
 		</a>
-
-		
 </div>
-
 	</div>
-
 </nav>
-
 <div class="container content-area flex-row">
-
 	<main id="primary">
-
-		
 <article id="post-205" class="post-205 post type-post status-publish format-standard has-post-thumbnail hentry category-blog category-tutorials tag-canvas tag-javascript">
-
-	
 <header class="entry-header">
-
 	<div class="header-content">
-
 		<h1 class="entry-title animated fadeInDown">The Canvas API, Part 2: Basic Shapes and the 2D Context</h1>
 		<span class="animated fadeInLeft"><i class="fas fa-calendar-alt"></i>21 Jan 2021 (Updated 12 May 2022)</span>
-
 		<span class="animated fadeInLeft"><i class="fas fa-tags"></i>Tags: <a href="https://davidmatthew.ie/tag/canvas/" rel="tag">Canvas</a>, <a href="https://davidmatthew.ie/tag/javascript/" rel="tag">JavaScript</a></span>
-
 	</div>
-
 </header>
-
 	<div class="entry-content animated fadeInUp">
-
-		
 <p>This is part 2 in <a href="/tag/canvas/">a series on the Canvas API</a>.</p>
-
-
-
 <h2 class="wp-block-heading">Boilerplate</h2>
-
-
-
 <p>First, create a folder and call it something like <code>canvas-starter</code>. Open this folder using your code editor of choice (mine is <a rel="noreferrer noopener" href="https://code.visualstudio.com/" target="_blank">VS Code</a>) and create a new file called <code>index.html</code>. Most code editors will churn out some <code>HTML</code> boilerplate using a shortcut of some kind; in the case of VS Code, type <code>!</code> and then <code>tab</code>, and it should generate something like the below:</p>
-
-
-
 <pre class="wp-block-code language-html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
@@ -290,35 +196,20 @@ code[class*=language-]{
     &lt;title&gt;Document&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-
-
-
 <p>Next, create the actual <code>&lt;canvas&gt;</code> element within the opening and closing body tags, and wrap it in a <code>&lt;main&gt;</code> element like so:</p>
-
-
-
 <pre class="wp-block-code language-html"><code>&lt;main&gt;
     &lt;canvas&gt;&lt;/canvas&gt;
 &lt;/main&gt;</code></pre>
-
-
-
 <p>For now, we&#8217;ll keep everything in the one <code>index.html</code> document to keep things simple. To complete our boilerplate code add some <code>&lt;style&gt;</code> and <code>&lt;script&gt;</code> tags into the head and body respectively, so that your markup looks something like this:</p>
-
-
-
 <pre class="wp-block-code language-html"><code>&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
     &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
     &lt;style&gt;
-
         /* Styles go here */
-
     &lt;/style&gt;
     &lt;title&gt;Canvas Starter&lt;/title&gt;
 &lt;/head&gt;
@@ -327,225 +218,79 @@ code[class*=language-]{
         &lt;canvas&gt;&lt;/canvas&gt;
     &lt;/main&gt;
     &lt;script&gt;
-
         /* Code goes here */
-    
     &lt;/script&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
-
-
-
 <p>Add a little CSS between the <code>&lt;style&gt;</code> tags so that when you open the file in your browser, you&#8217;ll actually see something.</p>
-
-
-
 <pre class="wp-block-code language-css"><code>canvas {
     border: 2px solid black;
 }</code></pre>
-
-
-
 <p>All this does is add an outline so that we know where the canvas is on the page, but it&#8217;s a start. We&#8217;re now ready to move onto the actual coding!</p>
-
-
-
 <h2 class="wp-block-heading">Fetching the Context</h2>
-
-
-
 <p>Because the <code>&lt;canvas&gt;</code> element is merely a container for graphics, to do anything at all with it (other than position it on the page or style its borders like we&#8217;ve done) we need to use JavaScript. Other than some minor CSS sizing adjustments that we&#8217;ll get to later, this is henceforth where the focus will be.</p>
-
-
-
 <p>The very first thing we need to do is store a reference to the canvas element in a variable. As this variable isn&#8217;t likely to change, we&#8217;ll use a constant:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>const&nbsp;cnv&nbsp;=&nbsp;document.querySelector('main&nbsp;canvas');</code></pre>
-
-
-
 <p>Using this variable, we&#8217;ll then retrieve the canvas <em>context</em>. This determines how we&#8217;re going to interact with the canvas, and the methods available for us to do so. There are <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext" target="_blank" rel="noreferrer noopener">a few options</a> available to us here, but the one we&#8217;ll stick with is the 2D rendering context.</p>
-
-
-
 <p>Using a one-letter constant for the context will save us some typing later on, as most of the methods we&#8217;ll be using will need to be prefixed with this.</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>const&nbsp;c&nbsp;=&nbsp;cnv.getContext('2d');</code></pre>
-
-
-
 <h2 class="wp-block-heading">Squares and Rectangles</h2>
-
-
-
 <p>The first shapes we&#8217;ll deal with are squares and rectangles. Because squares are simply rectangles with sides of equal length, one method, <code>rect()</code>, will suffice.</p>
-
-
-
 <p>The <code>rect()</code> method takes four arguments, as follows:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>context.rect(x, y, width, height).</code></pre>
-
-
-
 <ul class="wp-block-list"><li><code>x</code> : The starting point on the x-axis.</li><li><code>y</code> : The starting point on the y-axis.</li><li><code>width</code> : The width of the rectangle in pixels.</li><li><code>height</code> : The height of the rectangle in pixels.</li></ul>
-
-
-
 <p>This is a parameter format you&#8217;ll see repeated quite often, so going forward I&#8217;ll just <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rect" target="_blank" rel="noreferrer noopener">link to documentation</a> rather than elaborate on each parameter. Mozilla&#8217;s resources are great for readers ready to dig deeper.</p>
-
-
-
 <p>Before a rectangle will actually render to the canvas, we&#8217;ll need to add an additional method, either a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/stroke" target="_blank" rel="noreferrer noopener"><code>stroke()</code></a> or a <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fill" target="_blank" rel="noreferrer noopener"><code>fill()</code></a>. Every shape has either a stroke (its outline) or a fill (the colour it&#8217;s filled with), or quite often, you&#8217;ll see both used together. The important thing to remember is that your shape will need at least one of these methods. We&#8217;ll explore these both in more detail later, but for now we&#8217;ll just use the <code>fill()</code> method.</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>// A square starting at x:50 and y:50, 50px wide.
 c.rect(50,&nbsp;50,&nbsp;50,&nbsp;50);
-
 // A rectangle, starting at x:125 and y:50, 125px wide and 50px in height.
 c.rect(125,&nbsp;50,&nbsp;125,&nbsp;50);
-
 // Fills both shapes, defaulting to black.
 c.fill();</code></pre>
-
-
-
 <p>Here&#8217;s what you should see at this point:</p>
-
-
-
 <figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="456" height="231" src="https://davidmatthew.ie/wp-content/uploads/basic-shapes-1.png" alt="Square and Rectangle" class="wp-image-271" srcset="https://davidmatthew.ie/wp-content/uploads/basic-shapes-1.png 456w, https://davidmatthew.ie/wp-content/uploads/basic-shapes-1-300x152.png 300w" sizes="(max-width: 456px) 100vw, 456px" /></figure>
-
-
-
 <p>It&#8217;s worth pointing out that there are actually three additional <code>rect()</code> methods (yes, three!) which provide slight shortcuts to creating the kind of rectangle you&#8217;re after; <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect" target="_blank" rel="noreferrer noopener"><code>fillRect()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect" target="_blank" rel="noreferrer noopener"><code>strokeRect()</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect" target="_blank" rel="noreferrer noopener"><code>clearRect()</code></a>. The <code>fillRect()</code> method draws a filled rectangle, and <code>strokeRect()</code> draws a rectangular outline. The <code>clearRect()</code> method is a little different; it&#8217;s essentially a big eraser, and makes the rectangular dimensions you specify completely transparent. It can be particularly useful for clearing the canvas on each frame when animating.</p>
-
-
-
 <p>Here are the three methods in action:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>// A black square.
 c.fillRect(50,&nbsp;50,&nbsp;50,&nbsp;50);
-
 // A rectangular outline.
 c.strokeRect(125,&nbsp;50,&nbsp;125,&nbsp;50);
-
 // A transparent area cutting through the center of each.
 c.clearRect(0,&nbsp;70,&nbsp;300,&nbsp;10);</code></pre>
-
-
-
 <figure class="wp-block-image size-large"><img decoding="async" width="456" height="231" src="https://davidmatthew.ie/wp-content/uploads/basic-shapes-2.png" alt="Square and Rectangle with a line through it" class="wp-image-270" srcset="https://davidmatthew.ie/wp-content/uploads/basic-shapes-2.png 456w, https://davidmatthew.ie/wp-content/uploads/basic-shapes-2-300x152.png 300w" sizes="(max-width: 456px) 100vw, 456px" /></figure>
-
-
-
 <h2 class="wp-block-heading">Circles, Arcs and Ellipses</h2>
-
-
-
 <p>Just as there&#8217;s no dedicated square method, there&#8217;s no single method for creating circles either. They need to be created using either the <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/arc" target="_blank" rel="noreferrer noopener"><code>arc()</code></a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/ellipse" target="_blank" rel="noreferrer noopener"><code>ellipse()</code></a> methods.</p>
-
-
-
 <p>We&#8217;ll start with the <code>arc()</code> method. This takes 5 arguments (and an optional 6th) as follows:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>context.arc(x, y, radius, startAngle, endAngle &#91;, anticlockwise]);</code></pre>
-
-
-
 <p>Keeping our initial canvas constants <code>cnv</code> and <code>c</code> but commenting out everything else, let&#8217;s add a couple of <code>arc()</code> methods and a <code>fill()</code> to illustrate the above:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>// An arc with a radius of 25px, starting at 0° and ending at Math. PI (180°).
 c.arc(100, 75, 25, 0, Math.PI);
-
 // The same arc moved over to the right, and ending at Math. PI * 2 (360°).
 c.arc(200, 75, 25, 0, Math.PI * 2);
-
 // Fill both shapes.
 c.fill();</code></pre>
-
-
-
 <p>Don&#8217;t let the appearance of <code>Math.PI</code> scare you; all you need to know here is that it is the same as 180 degrees (a semicircle) and to get a full circle, you just multiply it by two. If you view your canvas now, you should see a simple circle and semicircle side by side (or a winking/drunken rectangle, if you&#8217;re prone to <a rel="noreferrer noopener" href="https://en.wikipedia.org/wiki/Pareidolia" target="_blank">pareidolia</a> like me).</p>
-
-
-
 <figure class="wp-block-image size-large"><img decoding="async" width="456" height="231" src="https://davidmatthew.ie/wp-content/uploads/basic-shapes-3.png" alt="Two arcs" class="wp-image-272" srcset="https://davidmatthew.ie/wp-content/uploads/basic-shapes-3.png 456w, https://davidmatthew.ie/wp-content/uploads/basic-shapes-3-300x152.png 300w" sizes="(max-width: 456px) 100vw, 456px" /></figure>
-
-
-
 <p>Let&#8217;s try the same example again, but this time using ellipses instead of arcs. The <code>ellipse()</code> method is very similar to the <code>arc()</code> method, but if you&#8217;re going for more of an oval shape, the <code>ellipse()</code> method is the more obvious choice. It takes the following format:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>context.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle &#91;, anticlockwise]);</code></pre>
-
-
-
 <p>Let&#8217;s replace the code of the previous example with the following:</p>
-
-
-
 <pre class="wp-block-code language-javascript"><code>// An oval-shaped ellipse (different x and y radii) ending at 180°.
 c.ellipse(100, 75, 35, 15, 0, 0, Math.PI);
-
 // The same oval shape shifted to the right, and filled to 360°.
 c.ellipse(200, 75, 35, 15, 0, 0, Math.PI * 2);
-
 // Fill both shapes.
 c.fill();</code></pre>
-
-
-
 <figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="456" height="231" src="https://davidmatthew.ie/wp-content/uploads/basic-shapes-4.png" alt="Two ellipses" class="wp-image-273" srcset="https://davidmatthew.ie/wp-content/uploads/basic-shapes-4.png 456w, https://davidmatthew.ie/wp-content/uploads/basic-shapes-4-300x152.png 300w" sizes="auto, (max-width: 456px) 100vw, 456px" /></figure>
-
-
-
 <p>This time our drunken rectangle looks like he might throw up all over our keyboard, yikes! 🙂</p>
-
-
-
 <p>If you experimeted with slightly different arguments (e.g. try changing one of the <code>y</code> values to <code>65</code> instead of <code>75</code>) you might have noticed some strange distortions appearing; we&#8217;ll get to why these happen a little later in the series. For the moment, it&#8217;s more than enough to familiarise yourself with the arguments these methods take, as there&#8217;s quite a bit to absorb here.</p>
-
-
-
 <p>It might also be helpful at this point to get a refresher on some basic trigonometry; a good resource is <a href="https://www.mathsisfun.com/algebra/trigonometry.html" target="_blank" rel="noreferrer noopener">MathIsFun&#8217;s introductory overview</a>, with some helpful animations to illustrate core concepts. And another is <a href="https://www.codedrome.com/trigonometry-in-javascript/" target="_blank" rel="noreferrer noopener">this tutorial by Adam Marc Williams</a>, which also uses <code>&lt;canvas&gt;</code>.</p>
-
-
-
 <p>So what other in-built shape methods does the Canvas API have to offer? Well, it might surprise you to know that this is it! But don&#8217;t be fooled into thinking that this is a limitation &#8211; when we learn about paths and their shape-creating powers, the real capabilities of the Canvas API will being to unfold. With paths, we can create virtually any shape imaginable!</p>
-
-
-
 <h2 class="wp-block-heading">So What&#8217;s Next?</h2>
-
-
-
 <p>Before we get to paths, we should address something else first. If you&#8217;ve been trying out these examples using a screen with a high PPI (pixels-per-inch) ratio (i.e. a screen with an extra crisp resolution, like an iPad or a high-end gaming monitor) you may have noticed that the canvas border is &#8216;sharper&#8217; than the shapes therein. Or in other words, the shapes we&#8217;ve created so far have been a tad blurry.</p>
-
-
-
 <p>Why is this? We&#8217;ll take a look at the reasons why, and how to remedy it, in <a href="https://davidmatthew.ie/the-canvas-api-part-3-a-retina-ready-responsive-canvas/" data-type="post" data-id="298">the next part of the series</a>.</p>
-
 	</div><!-- .entry-content -->
-
 </article><!-- #post-205 -->
-
 <div id="comments" class="comments-area">
-
 		<div id="respond" class="comment-respond">
 		<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://davidmatthew.ie/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message">Required fields are marked <span class="required">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required></textarea></p><p><div  id="g-recaptcha-0" class="g-recaptcha" data-sitekey="6LeGrvIZAAAAADZNlONy1VYeBll--D6f35yax2aj" data-theme="light"></div><noscript>Please enable JavaScript to submit this form.<br></noscript></p><p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" autocomplete="name" required /></p>
 <p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" maxlength="100" aria-describedby="email-notes" autocomplete="email" required /></p>
@@ -554,15 +299,9 @@ c.fill();</code></pre>
 <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='205' id='comment_post_ID' />
 <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
 </p></form>	</div><!-- #respond -->
-	
 </div><!-- #comments -->
-
 	</main>
-
-	
 <aside id="secondary" class="widget-area animated fadeInDown">
-
-	
 		<section id="recent-posts-2" class="widget widget_recent_entries">
 		<h2 class="widget-title">Recent Posts</h2>
 		<ul>
@@ -594,7 +333,6 @@ c.fill();</code></pre>
 	<li class="cat-item cat-item-1"><a href="https://davidmatthew.ie/category/uncategorized/">Uncategorized</a>
 </li>
 			</ul>
-
 			</section><section id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://davidmatthew.ie/">
 				<label>
 					<span class="screen-reader-text">Search for:</span>
@@ -603,16 +341,10 @@ c.fill();</code></pre>
 				<input type="submit" class="search-submit" value="Search" />
 			</form></section>
 </aside>
-
 </div>
-
-
 <footer id="footer">
-
 	<p>&copy; David Matthew 2024</p>
-
 </footer>
-
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="application/ld+json" id="slim-seo-schema">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://davidmatthew.ie/#website","url":"https://davidmatthew.ie/","name":"David Matthew","potentialAction":{"@id":"https://davidmatthew.ie/#searchaction"},"publisher":{"@id":"https://davidmatthew.ie/#organization"}},{"@type":"SearchAction","@id":"https://davidmatthew.ie/#searchaction","target":"https://davidmatthew.ie/?s={search_term_string}","query-input":"required name=search_term_string"},{"@type":"BreadcrumbList","name":"Breadcrumbs","@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#breadcrumblist","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://davidmatthew.ie/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://davidmatthew.ie/category/blog/"}]},{"@type":"WebPage","@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#webpage","url":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/","inLanguage":"en_US","name":"The Canvas API, Part 2: Basic Shapes and the 2D Context","description":"In this tutorial we look at some of the basic shape methods offered by the HTML5 Canvas API.","datePublished":"2021-01-21T21:35:23+00:00","dateModified":"2022-05-12T20:50:22+00:00","isPartOf":{"@id":"https://davidmatthew.ie/#website"},"breadcrumb":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#breadcrumblist"},"primaryImageOfPage":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#thumbnail"},"image":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#thumbnail"}},{"@type":"Organization","@id":"https://davidmatthew.ie/#organization","url":"https://davidmatthew.ie/","name":"David Matthew"},{"@type":"ImageObject","@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#thumbnail","url":"https://davidmatthew.ie/wp-content/uploads/basic-shapes-v2.svg","width":1024,"height":1024},{"@type":"Article","@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#article","url":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/","headline":"The Canvas API, Part 2: Basic Shapes and the 2D Context","datePublished":"2021-01-21T21:35:23+00:00","dateModified":"2022-05-12T20:50:22+00:00","wordCount":1452,"keywords":["Canvas","JavaScript"],"articleSection":["Blog","Tutorials"],"isPartOf":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#webpage"},"mainEntityOfPage":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#webpage"},"image":{"@id":"https://davidmatthew.ie/the-canvas-api-part-2-basic-shapes-and-the-2d-context/#thumbnail"},"publisher":{"@id":"https://davidmatthew.ie/#organization"},"author":{"@id":"https://davidmatthew.ie/#/schema/person/2fe21967091bfe21ab79e576d039833c"}},{"@type":"Person","@id":"https://davidmatthew.ie/#/schema/person/2fe21967091bfe21ab79e576d039833c","url":"https://davidmatthew.ie","name":"davidmatthew","image":"https://secure.gravatar.com/avatar/64a9a7c454931970667f97c9db07940f?s=96&d=mm&r=g"}]}</script>
 <!-- BEGIN recaptcha, injected by plugin wp-recaptcha-integration  -->
 <script type="text/javascript">
@@ -643,14 +375,12 @@ c.fill();</code></pre>
 				})(e[i]);
 			}
 		}
-
 		// if jquery present re-render jquery/ajax loaded captcha elements
 		if ( typeof jQuery !== 'undefined' )
 			jQuery(document).ajaxComplete( function(evt,xhr,set){
 				if( xhr.responseText && xhr.responseText.indexOf('6LeGrvIZAAAAADZNlONy1VYeBll--D6f35yax2aj') !== -1)
 					wp_recaptchaLoadCallback();
 			} );
-
 		</script><script src="https://www.google.com/recaptcha/api.js?onload=wp_recaptchaLoadCallback&#038;render=explicit" async defer></script>
 <!-- END recaptcha -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.17.1/components/prism-core.min.js" id="prism-core-js"></script>
@@ -658,10 +388,8 @@ c.fill();</code></pre>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js" id="tiny-slider-js"></script>
 <script type="text/javascript" src="https://davidmatthew.ie/wp-content/themes/david-matthew-theme/js/main.js" id="main-js"></script>
 <script type="text/javascript" src="https://davidmatthew.ie/wp-includes/js/comment-reply.min.js" id="comment-reply-js" async="async" data-wp-strategy="async"></script>
-
 		<!-- Cookie Notice plugin v2.5.4 by Hu-manity.co https://hu-manity.co/ -->
 		<div id="cookie-notice" role="dialog" class="cookie-notice-hidden cookie-revoke-hidden cn-position-bottom" aria-label="Cookie Notice" style="background-color: rgba(68,68,68,1);"><div class="cookie-notice-container" style="color: #fff"><span id="cn-notice-text" class="cn-text-container">I use cookies because, you know, you can't not these days. If you continue to use this site we'll assume you're ok with this! :)</span><span id="cn-notice-buttons" class="cn-buttons-container"><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button" aria-label="Yep" style="background-color: #00a99d">Yep</a><a href="https://davidmatthew.ie/privacy-policy/" target="_blank" id="cn-more-info" class="cn-more-info cn-button" aria-label="Privacy policy" style="background-color: #00a99d">Privacy policy</a></span><span id="cn-close-notice" data-cookie-set="accept" class="cn-close-icon" title="No"></span></div>
-			
 		</div>
 		<!-- / Cookie Notice plugin -->
 </body>
